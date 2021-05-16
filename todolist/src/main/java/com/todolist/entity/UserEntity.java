@@ -18,7 +18,7 @@ public class UserEntity {
     @Column(name = "username", nullable = false, unique = true, length = 30)
     private String username;
 
-    @Column(name = "password", nullable = false, length = 30)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @ManyToMany

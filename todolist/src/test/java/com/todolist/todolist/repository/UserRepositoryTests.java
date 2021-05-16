@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.List;
@@ -26,10 +27,11 @@ public class UserRepositoryTests {
 
     @Test
     public void createUserTest() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         RoleEntity role = entityManager.find(RoleEntity.class, 1L);
         UserEntity user = new UserEntity();
         user.setUsername("vinhqd");
-        user.setPassword("123456");
+        user.setPassword(encoder.encode("123456"));
         user.addRole(role);
         UserEntity savedUser = repo.save(user);
         Assertions.assertThat(savedUser.getId()).isGreaterThan(0);
