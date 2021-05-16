@@ -28,7 +28,7 @@ public class UserEntity {
     private List<RoleEntity> roles = new ArrayList<>();
 
     @Transient
-    public void saveRole(RoleEntity role) {
+    public void addRole(RoleEntity role) {
         roles.add(role);
     }
 
